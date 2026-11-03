@@ -11,6 +11,7 @@ const filters = ["All", "Active", "Completed"];
 export default function App() {
   const [tasks, setTasks] = useState(initialTasks);
   const [draft, setDraft] = useState("");
+  const [deadlineDraft, setDeadlineDraft] = useState("");
   const [filter, setFilter] = useState("All");
 
   const visibleTasks = useMemo(
@@ -31,9 +32,10 @@ export default function App() {
 
     setTasks((current) => [
       ...current,
-      { id: Date.now(), title, done: false }
+      { id: Date.now(), title, done: false, deadline: deadlineDraft || null }
     ]);
     setDraft("");
+    setDeadlineDraft("");
   }
 
   function toggleTask(id) {
@@ -71,6 +73,15 @@ export default function App() {
             onChange={(event) => setDraft(event.target.value)}
             placeholder="Write down your next task..."
           />
+          <label className="sr-only" htmlFor="task-deadline">Deadline</label>
+          <input
+            id="task-deadline"
+            className="deadline-input"
+            type="date"
+            aria-label="Deadline"
+            value={deadlineDraft}
+            onChange={(event) => setDeadlineDraft(event.target.value)}
+          />
           <button type="submit">Add task <span aria-hidden="true">+</span></button>
         </form>
 
@@ -104,7 +115,14 @@ export default function App() {
                 >
                   {task.done && <span aria-hidden="true">✓</span>}
                 </button>
-                <span className="task-title">{task.title}</span>
+                <span className="task-details">
+                  <span className="task-title">{task.title}</span>
+                  {task.deadline && (
+                    <time className="task-deadline" dateTime={task.deadline}>
+                      Due {task.deadline}
+                    </time>
+                  )}
+                </span>
                 <button
                   type="button"
                   className="delete-button"

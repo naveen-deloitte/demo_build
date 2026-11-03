@@ -109,6 +109,7 @@ h1 span { color: #5576df; }
 
 .task-form input::placeholder { color: #a4acb9; }
 .task-form:focus-within { border-color: #9aadee; box-shadow: 0 0 0 3px #5576df17; }
+.task-form .deadline-input { flex: 0 0 auto; width: 130px; padding: 8px 4px; color: #7d8798; font-size: 11px; }
 
 .task-form button {
   padding: 10px 16px;
@@ -172,7 +173,9 @@ h1 span { color: #5576df; }
 .task:hover { border-color: #dce2ed; transform: translateY(-1px); }
 .check-button { width: 18px; height: 18px; display: grid; flex: 0 0 auto; place-items: center; padding: 0; color: white; background: white; border: 1.5px solid #d5dbe6; border-radius: 6px; font-size: 11px; }
 .completed .check-button { background: #70bea3; border-color: #70bea3; }
+.task-details { min-width: 0; flex: 1; display: grid; gap: 3px; padding: 10px 0; }
 .task-title { flex: 1; color: #424d60; font-size: 13px; }
+.task-deadline { color: #929aaa; font-size: 10px; }
 .completed .task-title { color: #a3aab6; text-decoration: line-through; }
 .delete-button { width: 25px; height: 25px; padding: 0; color: #a6aebb; background: transparent; border: 0; border-radius: 6px; font-size: 20px; line-height: 1; opacity: 0; }
 .task:hover .delete-button, .delete-button:focus-visible { opacity: 1; }
@@ -190,6 +193,9 @@ h1 span { color: #5576df; }
   .topbar-note { font-size: 11px; }
   .board { margin-top: 56px; }
   .list-heading { align-items: flex-start; flex-direction: column; gap: 13px; }
+  .task-form { flex-wrap: wrap; }
+  .task-form .deadline-input { order: 1; width: calc(100% - 115px); margin-left: 4px; }
+  .task-form button { order: 2; }
   .delete-button { opacity: 1; }
 }
 
